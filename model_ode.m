@@ -53,10 +53,12 @@ k.gamma_max %max elongation rate
 k.K_gamma% hill gamma 
 k.k_b %ribosome binding rate
 k.k_u %ribosome unbinding rate
-k.thetax
+k.theta_r
+k.theta_nr
 k.wr
 k.wt
 k.wm
+k.wq
 k.Kq
 k.hq
 k.dm %mRNA degradation rate

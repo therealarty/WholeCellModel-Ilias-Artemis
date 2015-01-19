@@ -15,13 +15,35 @@ options = odeset(options, 'RelTol', 1e-3,...
 
 k = struct();
 
-k.a     = 0.01;     % synthesis rate of species a
-k.ab    = 0.2;      % rate constant of a reacting with b to form c
-k.c     = 0.01;     % rate constant of c reacting back to give a and b
-k.cat   = 0.1;      % maximal rate of c converting to d
-k.m     = 0.5;      % amount of c (or threshold), at which rate of conversion 
-                      % from c to d is half-maximal
-k.deg   = 0.02;     % degradation rate constant of d
+
+k.s         = 1e4; %nutrient concentration
+k.dm       = 0.1;%mRNA degradation rate
+k.ns       = 0.5;
+k.nr       = 7459;
+k.nt       = 300;
+k.nm       = 300;
+k.nq       = 300;
+k.gamma_max = 1260;
+k.K_gamma   = 7;
+k.vt       = 726;
+k.Kt       = 1000;
+k.vm        = 5800;
+k.Km        = 1000;
+k.wr        = 930;
+%k.we        = 4.14;
+k.wt        = 4.14;
+k.wm        = 4.14;
+k.wq        = 948.93;
+k.theta_r   = 426.87;
+k.theta_nr  = 4.38;
+k.theta_x   = k.theta_nr;
+k.Kq        = 152219;
+k.hq        = 4;
+k.k_b       = 1;
+k.k_u       = 1;
+%k.k_cm      = 0.00599;
+%k.M         = 1e8;
+
 
 
 %% set initial values
