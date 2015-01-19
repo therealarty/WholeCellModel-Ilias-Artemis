@@ -37,7 +37,7 @@ ddtc_q       = 0;
 
 %% for each reaction - add up contributions to rates of changes
 
-lambda=ComputeLambda(a,r,e_t,e_m,q,c_r,c_t,c_m,c_q,k);
+lambda=ComputeLambda(a,r,e_t,e_m,q,c_r,c_t,c_m,c_q,k,1);
 
 % k.s %nutrient concentration
 % k.ns % nutrient effiency

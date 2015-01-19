@@ -1,5 +1,5 @@
 %% define ode options :
-tfinal  = 1e3;                              % final time
+tfinal  = 3e3;                              % final time
 
 %% configure integrator (check 'doc ode15s' for more info)
 options = odeset('NonNegative',[1:4]);      % ensures variables stay positive 
@@ -42,7 +42,7 @@ k.hq        = 4;
 k.k_b       = 1;
 k.k_u       = 1;
 %k.k_cm      = 0.00599;
-%k.M         = 1e8;
+k.M         = 1e8;
 
 
 
