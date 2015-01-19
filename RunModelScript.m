@@ -16,7 +16,7 @@ options = odeset(options, 'RelTol', 1e-3,...
 k = struct();
 
 
-k.s         = 1e4; %nutrient concentration
+k.s        = 1e4; %nutrient concentration
 k.dm       = 0.1;%mRNA degradation rate
 k.ns       = 0.5;
 k.nr       = 7459;
@@ -99,21 +99,26 @@ for va=1:16
 end
 
 
-a = result(:,1);    % a = first column of result
-b = result(:,2);    % b = second column of result
-c = result(:,3);    % ... 
-d = result(:,4);
 
-%% plot results
-figure(1); clf; 
-subplot(4,1,1)
-plot(t,a); ylabel('a', 'fontsize', 14);
+o.lambda=Tlambda;
+SumCx=(S.c_m+S.c_q+S.c_r+S.c_t);
+o.t_fraction=S.c_t./SumCx;
+o.m_fraction=S.c_m./SumCx;
 
-subplot(4,1,2)
-plot(t,b); ylabel('b', 'fontsize', 14);
+o.r_free_fraction=S.r./(SumCx+S.r);
+o.q_fraction=S.c_q./SumCx;
+o.r_fraction=S.c_r./SumCx;
 
-subplot(4,1,3)
-plot(t,c); ylabel('c', 'fontsize', 14);
 
-subplot(4,1,4)
-plot(t,d); ylabel('d', 'fontsize', 14); xlabel('time', 'fontsize', 14)
+%% Tests
+
+%create state struct
+S=struct;
+for st=1:14
+    
+    eval(strcat('S.',stateNames{st},'=result(:,',num2str(st),');'));
+end
+
+
+[delta12,delta23,delta13]=Test1(Tlambda(end),result(end,1),result(end,5),result(end,4),k)
+
