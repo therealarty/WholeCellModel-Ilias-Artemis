@@ -38,9 +38,10 @@ ddtc_q       = 0;
 %% for each reaction - add up contributions to rates of changes
 
 k.s %nutrient concentration
-k.vimp %nutrient uptake rate
 k.lambda %growth rate
 k.ns % nutrient effiency
+k.vt %transport
+k.Kt %Transport
 k.vm %max enzym rate metabolism
 k.Km %MM constant enzym metabolism
 k.nr %length rib prot
@@ -60,8 +61,10 @@ k.hq
 k.dm %mRNA degradation rate
 
 
+vimp=Hillfun(k.vt,k.Kt,k.s);
 vcat=Hillfun(k.vm,k.Km,s_i);
-ddts_i     = ddts_i  + k.vimp*e_t*k.s-k.lambda*s_i;
+
+ddts_i     = ddts_i  + vimp*e_t-vcat*e_m-k.lambda*s_i;
 
 ddta       = ddta + k.ns*vcat*e_m;
 ddta       = ddta - c_r*Hillfun(k.gamma_max,k.K_gamma,a);% multiply and divide by nx
