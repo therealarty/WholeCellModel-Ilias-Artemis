@@ -1,5 +1,5 @@
 %% define ode options :
-tfinal  = 1e2;                              % final time
+tfinal  = 1e3;                              % final time
 
 %% configure integrator (check 'doc ode15s' for more info)
 options = odeset('NonNegative',[1:4]);      % ensures variables stay positive 
@@ -47,17 +47,58 @@ k.k_u       = 1;
 
 
 %% set initial values
-a0      = 1;
-b0      = 1;
-c0      = 0;
-d0      = 0;
+% 
+% s_i       = x(1);
+% a         = x(2);
+% r         = x(3);
+% e_t       = x(4);
+% e_m       = x(5);
+% q         = x(6);
+% m_r       = x(7);
+% m_t       = x(8);
+% m_m       = x(9);
+% m_q       = x(10);
+% c_r       = x(11);
+% c_t       = x(12);
+% c_m       = x(13);
+% c_q       = x(14);
+X0.s_i = 0;
+X0.a   = 0;
+X0.r   = 1;
+X0.e_t = 1;
+X0.e_m = 1;
+X0.q = 0;%
+X0.m_r = 0;
+X0.m_t = 0;
+X0.m_m = 0;
+X0.m_q = 0;
+X0.c_r = 0;
+X0.c_t = 0;
+X0.c_m = 0;
+X0.c_q = 0;
 
-x0      = [a0, b0, c0, d0]; % definition of the initial vector of variables
+stateNames={'s_i','a','r','e_t','e_m','q','m_r','m_t','m_m','m_q','c_r','c_t','c_m','c_q','\lambda','M'};
+
+x0 = [X0.s_i ;X0.a   ;X0.r ;X0.e_t ;X0.e_m;X0.q ;X0.m_r ;X0.m_t ;X0.m_m ;X0.m_q ;X0.c_r ;X0.c_t ;X0.c_m ;X0.c_q ];
 
 %% simulate
-[t,result] = ode15s(@(t,result) toymodel_ode(t,result,k),[0,tfinal],x0,options);
+[t,result] = ode15s(@(t,result) model_ode(t,result,k),[0,tfinal],x0,options);
 
 %% rename variables
+Tlambda=ComputeLambda(result(:,2),result(:,3),result(:,4),result(:,5),result(:,6),result(:,11),result(:,12),result(:,13),result(:,14),k);
+result(:,15)=Tlambda;
+TM=ComputeM(result(:,3),result(:,4),result(:,5),result(:,6),result(:,11),result(:,12),result(:,13),result(:,14),k);
+result(:,16)=TM;
+
+figure;
+for va=1:16
+    subplot(4,4,va)
+    plot(t,result(:,va))
+    legend(stateNames{va})
+    
+end
+
+
 a = result(:,1);    % a = first column of result
 b = result(:,2);    % b = second column of result
 c = result(:,3);    % ... 

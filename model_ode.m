@@ -37,31 +37,31 @@ ddtc_q       = 0;
 
 %% for each reaction - add up contributions to rates of changes
 
-lambda=ComputeLambda(a,r,t,m,q,c_r,c_t,c_m,c_q,k);
+lambda=ComputeLambda(a,r,e_t,e_m,q,c_r,c_t,c_m,c_q,k);
 
-k.s %nutrient concentration
-k.ns % nutrient effiency
-k.vt %transport
-k.Kt %Transport
-k.vm %max enzym rate metabolism
-k.Km %MM constant enzym metabolism
-k.nr %length rib prot
-k.nt %length transport prot
-k.nm %length metabolic enzyme
-k.nq %length house keeping genes
-k.gamma_max %max elongation rate
-k.K_gamma% hill gamma 
-k.k_b %ribosome binding rate
-k.k_u %ribosome unbinding rate
-k.theta_r
-k.theta_nr
-k.wr
-k.wt
-k.wm
-k.wq
-k.Kq
-k.hq
-k.dm %mRNA degradation rate
+% k.s %nutrient concentration
+% k.ns % nutrient effiency
+% k.vt %transport
+% k.Kt %Transport
+% k.vm %max enzym rate metabolism
+% k.Km %MM constant enzym metabolism
+% k.nr %length rib prot
+% k.nt %length transport prot
+% k.nm %length metabolic enzyme
+% k.nq %length house keeping genes
+% k.gamma_max %max elongation rate
+% k.K_gamma% hill gamma 
+% k.k_b %ribosome binding rate
+% k.k_u %ribosome unbinding rate
+% k.theta_r
+% k.theta_nr
+% k.wr
+% k.wt
+% k.wm
+% k.wq
+% k.Kq
+% k.hq
+% k.dm %mRNA degradation rate
 
 
 vimp=Hillfun(k.vt,k.Kt,k.s);
